@@ -3,5 +3,5 @@ set -euo pipefail
 
 pushd linux
   make olddefconfig
-  make -j $(nproc)
+  make -j $(nproc) $*
 popd

@@ -2,5 +2,5 @@
 set -euo pipefail
 
 pushd buildroot
-  make -j $(nproc)
+  make -j $(nproc) $*
 popd
