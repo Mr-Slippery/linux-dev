@@ -3,7 +3,10 @@ set -euo pipefail
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 . "${SCRIPT_DIR}"/config.sh
 
-CONTAINER=linux-dev
+if ! docker image inspect "$IMAGE" > /dev/null 2>&1; then
+  echo "Image '$IMAGE' not found. Triggering build..."
+  "${SCRIPT_DIR}"/build.sh
+fi
 
 pushd "${SCRIPT_DIR}"/..
 
@@ -23,5 +26,6 @@ docker run --device /dev/kvm \
            --name "${CONTAINER}" \
            -v "$(pwd)":"$(pwd)":Z \
            -w "$(pwd)" \
-           "${IMAGE}"
+           "${IMAGE}" \
+           $*
 popd
