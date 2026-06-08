@@ -15,7 +15,10 @@ FROM debian:trixie-slim
 #   - g++: host tool compilation
 #   - gettext: for packages using i18n
 #   - libncurses-dev: for menuconfig (both kernel and buildroot)
-
+#
+# Convenience
+#   - vim
+#   - mc
 RUN apt-get update && apt-get install -y --no-install-recommends \
     bc \
     bison \
@@ -44,6 +47,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
     zstd \
     git \
+    vim \
+    mc \
     && rm -rf /var/lib/apt/lists/*
 
 ARG UID=1000
